@@ -15,7 +15,7 @@ class ProductParser implements Parser
 
     /**
      * return array of size and descriotiuon for product page
-     * @return array to text elements
+     * @return array two text elements
      */
     public function getParsedData()
     {
