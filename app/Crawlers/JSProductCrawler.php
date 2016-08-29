@@ -2,12 +2,27 @@
 namespace App\Crawlers;
 use Goutte\Client;
 
+/**
+ * Interface JSCrawler - specify behaviours that can be relied in Crawlers.
+ * @package App\Crawlers
+ */
 interface JSCrawler
 {
+    /**
+     * @return mixed
+     */
     public function getURL();
+
+    /**
+     * @return mixed
+     */
     public function getSize();
 }
 
+/**
+ * Class JSProductCrawler - really just a simple means for managing what we need from Goutte
+ * @package App\Crawlers
+ */
 class JSProductCrawler implements JSCrawler
 {
     /**
@@ -22,8 +37,7 @@ class JSProductCrawler implements JSCrawler
     }
 
     /**
-     * Performa a GET request to the specified URL
-     * @param  string $url Url to fetch.  Default is index page for test.
+     * Performa a GET request to the URL the Crawler was instantiated with.
      * @return Crawler   Symfony\Component\DomCrawler\Crawler DOM Crawler object
      * @todo: should we handle exceptions here if ::request throws and error
      */
@@ -50,13 +64,6 @@ class JSProductCrawler implements JSCrawler
      */
     private function request($url='', $method = 'GET')
     {
-        try 
-        {
-            return $this->client->request(strtoupper($method), $url);
-        } 
-        catch (ConnectException $error) 
-        {
-            throw $error;
-        }
+        return $this->client->request(strtoupper($method), $url);
     }
 }

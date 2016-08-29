@@ -7,7 +7,8 @@ use App\Crawlers\JSProductCrawler;
 use App\Crawlers\JSCrawler;
 
 /**
- * Class to parse the Index and extra relevant data for assembly
+ * Class to parse the Index and extract relevant data for assembly
+ * @package App\Parsers
  */
 class IndexParser implements Parser
 {

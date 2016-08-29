@@ -4,6 +4,10 @@ namespace App\Parsers;
 use App\Parsers\Parser;
 use App\Crawlers\JSProductCrawler;
 
+/**
+ * Class ProductParser - Extract data from Product Page URLs
+ * @package App\Parsers
+ */
 class ProductParser implements Parser
 {
 
@@ -45,7 +49,6 @@ class ProductParser implements Parser
      */
     public function getSize()
     {
-        $size_in_bytes = 1000000;
         $size_in_bytes = $this->crawler->getSize();
         return $this->formatSizeData($size_in_bytes);
     }

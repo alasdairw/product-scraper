@@ -8,8 +8,7 @@ use App\Crawlers\JSProductCrawler;
 
 /**
  * Simple tests for the Base parser class
- * @todo: should probably use a proper mock HTTP library for this, but lumen makes it easy enough to have
- * a couple of routes that mock back the test data on local URLs.
+ * @package App\Tests
  */
 class IndexParserTest extends TestCase
 {

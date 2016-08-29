@@ -5,8 +5,16 @@ use App\Formatters\JsonFormatter;
 use App\Parsers\IndexParser;
 use Mockery;
 
+/**
+ * Class JSONFormatterTest
+ * @package App\Tests
+ */
 class JSONFormatterTest extends TestCase
 {
+
+    /**
+     *  Mock an IndexParser
+     */
     public function setUp()
     {
         $parser = Mockery::mock(IndexParser::class);
@@ -14,6 +22,11 @@ class JSONFormatterTest extends TestCase
         $this->formatter = new JsonFormatter($parser);
     }
 
+    /**
+     *  Test thes the final JSON to ensure it meets roughly what's expected - A
+     *  results array with at least one element that containst a title, and
+     *  a total figure, that match what was passed in as a mock.
+     */
     public function testGetFormattedOutput()
     {
         $output = $this->formatter->getFormattedOutput();

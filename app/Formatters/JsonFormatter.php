@@ -1,11 +1,23 @@
 <?php
 namespace App\Formatters;
 use App\Parsers\Parser;
+
+/**
+ * Interface Formatter - specify formatter behaviour
+ * @package App\Formatters
+ */
 interface Formatter
 {
+    /**
+     * @return mixed
+     */
     public function getFormattedOutput();
 }
 
+/**
+ * Class JsonFormatter - a formatter for JSON output
+ * @package App\Formatters
+ */
 class JsonFormatter implements Formatter
 {
     /**

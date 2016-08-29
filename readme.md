@@ -1,6 +1,6 @@
 ## Installation
 
-Requirements: composer, PHP 5.4.
+Requirements: composer, PHP 5.6+
 
     git clone
     composer install

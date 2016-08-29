@@ -7,9 +7,7 @@ use Symfony\Component\DomCrawler\Crawler;
 use Mockery;
 /**
  * Simple tests for the Product parser class
- * @todo: should probably use a proper mock HTTP library for this, but lumeuse PHPUnit\Framework\TestCase;
-n makes it easy enough to have
- * a couple of routes that load fixed test data on local URLs.
+ * @package App\Tests
  */
 class ProductParserTest extends TestCase
 {

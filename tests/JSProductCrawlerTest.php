@@ -6,8 +6,8 @@ use Symfony\Component\DomCrawler\Crawler;
 use App\Crawlers\JSProductCrawler;
 
 /**
- * Simple tests for the JSProductCrawler class
- * @todo: 
+ * Class JSProductCrawlerTest
+ * @package App\Tests
  */
 class JSProductCrawlerTest extends TestCase
 {
