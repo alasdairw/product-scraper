@@ -1,5 +1,6 @@
 <?php
 namespace App\Formatters;
+use App\Parsers\Parser;
 interface Formatter
 {
     public function getFormattedOutput();
@@ -7,19 +8,14 @@ interface Formatter
 
 class JsonFormatter implements Formatter
 {
-    public function __construct(\Parser $parser)
+    public function __construct(Parser $parser)
     {
         $this->parser = $parser;
     }
 
-    private function format(array $array)
-    {
-        return json_encode($array,true);
-    }
-
     public function getFormattedOutput()
     {
-        return json_encode($this->parser->getParsedData(),true);
+        return json_encode($this->parser->getParsedData(),JSON_PRETTY_PRINT);
     }
 
 }

@@ -10,6 +10,7 @@ class ProductParser implements Parser
     public function __construct(JSProductCrawler $crawler)
     {
         $this->markup = $crawler->getURL();
+        $this->crawler = $crawler;
     }
 
     public function getParsedData()
@@ -39,7 +40,8 @@ class ProductParser implements Parser
      */
     public function getSize()
     {
-        $size_in_bytes = $this->client->getInternalResponse()->getHeader('Content-Length');
+        $size_in_bytes = 1000000;
+        $size_in_bytes = $this->crawler->getSize();
         return $this->formatSizeData($size_in_bytes);
     }
 

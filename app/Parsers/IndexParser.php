@@ -11,7 +11,7 @@ use App\Crawlers\JSCrawler;
  */
 class IndexParser implements Parser
 {
-    public function __construct(\JSCrawler $crawler)
+    public function __construct(JSCrawler $crawler)
     {
         $this->markup = $crawler->getURL();
     }
@@ -26,6 +26,7 @@ class IndexParser implements Parser
             {
                 return $this->extractProductData($product);
             });
+
 
         //calculate the total value using PHP 5.4
         $total = 0;
@@ -48,7 +49,7 @@ class IndexParser implements Parser
     {
         $title = $this->getTitle($product);
         $unit_price = $this->getUnitPrice($product);      
-        return array_merge(['title'=>$title,'unit_price'=>number_format($unit_price,2)]/*,$this->getDescriptionAndSize($product)*/);
+        return array_merge(['title'=>$title,'unit_price'=>number_format($unit_price,2)],$this->getDescriptionAndSize($product));
     }
 
     /**

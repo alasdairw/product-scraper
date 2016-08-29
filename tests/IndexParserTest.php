@@ -51,7 +51,7 @@ class IndexParserTest extends TestCase
 </html>
 EOD;
 
-        $crawler = Mockery::mock('JSCrawler');
+        $crawler = Mockery::mock(JSProductCrawler::class);
         $crawler->shouldReceive('getURL')
                 ->once()
                 ->andReturn(new Crawler($html,'http://localhost'));

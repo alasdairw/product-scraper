@@ -17,6 +17,7 @@ class JSProductCrawler implements JSCrawler
     public function __construct($url='http://hiring-tests.s3-website-eu-west-1.amazonaws.com/2015_Developer_Scrape/5_products.html')
     {
         $this->client = new Client();
+        $this->url = $url;
     }
 
     /**
@@ -25,9 +26,18 @@ class JSProductCrawler implements JSCrawler
      * @return Crawler   Symfony\Component\DomCrawler\Crawler DOM Crawler object
      * @todo: should we handle exceptions here if ::request throws and error
      */
-    public function getURL($url='')
+    public function getURL()
     {
-        return $this->request($url);
+        return $this->request($this->url);
+    }
+
+    /**
+     * Get the size in bytes of the request
+     * @return [type] [description]
+     */
+    public function getSize()
+    {
+        return $this->client->getInternalResponse()->getHeader('Content-Length');
     }
 
     /**

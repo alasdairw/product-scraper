@@ -2,8 +2,9 @@
 namespace App\Tests;
 use PHPUnit\Framework\TestCase;
 use App\Parsers\ProductParser;
-use App\Parsers\IndexParser;
+use App\Crawlers\JSProductCrawler;
 use Symfony\Component\DomCrawler\Crawler;
+use Mockery;
 /**
  * Simple tests for the Product parser class
  * @todo: should probably use a proper mock HTTP library for this, but lumeuse PHPUnit\Framework\TestCase;
@@ -18,6 +19,27 @@ class ProductParserTest extends TestCase
     public function setUp()
     {
         parent::setUp();
+        $html = <<<EOD
+<html>
+    <head>
+        <meta name="description" content="Buy Sainsbury&#039;s Conference Pears, Ripe &amp; Ready x4 (minimum) online from Sainsbury&#039;s, the same great quality, freshness and choice you&#039;d find in store. Choose from 1 hour delivery slots and collect Nectar points."/>
+    </head>
+    <body>
+        <div class="productText">
+            <p>Conference</p>
+        </div>
+    </body>
+</html>
+EOD;
+
+        $crawler = Mockery::mock(JSProductCrawler::class);
+        $crawler->shouldReceive('getURL')
+                ->once()
+                ->andReturn(new Crawler($html,'http://localhost'));
+        $crawler->shouldReceive('getSize')
+                ->once()
+                ->andReturn(10000);
+        $this->parser = new ProductParser($crawler);
     }
 
     /**
@@ -26,9 +48,9 @@ class ProductParserTest extends TestCase
      */
     public function testGetDescription()
     {
-        //$description = $this->parser->getDescription();
-        //$this->assertInternalType('string',$description);
-        //$this->assertGreaterThanOrEqual(1,strlen($description));
+        $description = $this->parser->getDescription();
+        $this->assertInternalType('string',$description);
+        $this->assertGreaterThanOrEqual(1,strlen($description));
     }
 
     /**
@@ -37,8 +59,8 @@ class ProductParserTest extends TestCase
      */
     public function testGetSize()
     {
-        //$size = $this->parser->getSize();
-        //$this->assertInternalType('string',$size);
-        //$this->assertGreaterThanOrEqual(1,strlen($size));   
+        $size = $this->parser->getSize();
+        $this->assertInternalType('string',$size);
+        $this->assertGreaterThanOrEqual(1,strlen($size));   
     }
 }
