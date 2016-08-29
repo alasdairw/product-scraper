@@ -28,15 +28,7 @@ class IndexParser implements Parser
             });
 
 
-        //calculate the total value using PHP 5.4
-        $total = 0;
-        foreach($output as $product)
-        {
-            $total += $product['unit_price'];
-        }
-
-        //The test specified PHP 5.4+ - if 5.5+ is acceptable, then this is a quicker way
-        //$total = array_sum(array_column($output,'unit_price'));
+        $total = array_sum(array_column($output,'unit_price'));
         return array('results'=>$output,'total'=>number_format($total,2));
     }
     
