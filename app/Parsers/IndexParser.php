@@ -3,15 +3,17 @@
 namespace App\Parsers;
 use App\Parsers\Parser;
 use Symfony\Component\DomCrawler\Crawler;
+use App\Crawlers\JSProductCrawler;
+use App\Crawlers\JSCrawler;
 
 /**
  * Class to parse the Index and extra relevant data for assembly
  */
 class IndexParser implements Parser
 {
-    public function __construct(JSCrawler $crawler)
+    public function __construct(\JSCrawler $crawler)
     {
-        $this->js_crawler = $crawler;
+        $this->markup = $crawler->getURL();
     }
 
     /**
@@ -20,7 +22,7 @@ class IndexParser implements Parser
      */
     public function getParsedData()
     {
-        $output = $this->js_crawler->filter('.productInner')->each(function (Crawler $product)
+        $output = $this->markup->filter('.productInner')->each(function (Crawler $product)
             {
                 return $this->extractProductData($product);
             });
@@ -46,7 +48,7 @@ class IndexParser implements Parser
     {
         $title = $this->getTitle($product);
         $unit_price = $this->getUnitPrice($product);      
-        return array_merge(['title'=>$title,'unit_price'=>number_format($unit_price,2)],$this->getDescriptionAndSize($product));
+        return array_merge(['title'=>$title,'unit_price'=>number_format($unit_price,2)]/*,$this->getDescriptionAndSize($product)*/);
     }
 
     /**
@@ -82,7 +84,7 @@ class IndexParser implements Parser
         
 
         $link_url = $product->selectLink($this->getTitle($product))->link()->getUri();
-        $product_parser = new ProductParser($link_url);
+        $product_parser = new ProductParser(new JSProductCrawler($link_url));
         $description = $product_parser->getDescription();
         $size = $product_parser->getSize();
 

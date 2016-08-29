@@ -2,9 +2,19 @@
 
 namespace App\Parsers;
 use App\Parsers\Parser;
+use App\Crawlers\JSProductCrawler;
 
-class ProductParser extends Parser
+class ProductParser implements Parser
 {
+
+    public function __construct(JSProductCrawler $crawler)
+    {
+        $this->markup = $crawler->getURL();
+    }
+
+    public function getParsedData()
+    {
+    }
     
     /**
      * Get the product description
@@ -17,9 +27,9 @@ class ProductParser extends Parser
      */
     public function getDescription()
     {
-        $description = $this->base_request->filterXPath('//meta[@name="description"]')->attr('content');
+        $description = $this->markup->filterXPath('//meta[@name="description"]')->attr('content');
         //If I've chosen the wrong description element here, then the alternate is:
-        //$description = trim($this->base_request->filter('.productText')->text());
+        //$description = trim($this->markup->filter('.productText')->text());
         return $description;
     }
 
