@@ -5,6 +5,7 @@ use Goutte\Client;
 interface JSCrawler
 {
     public function getURL();
+    public function getSize();
 }
 
 class JSProductCrawler implements JSCrawler
@@ -33,7 +34,7 @@ class JSProductCrawler implements JSCrawler
 
     /**
      * Get the size in bytes of the request
-     * @return [type] [description]
+     * @return integer size of request in bytes
      */
     public function getSize()
     {
@@ -45,7 +46,7 @@ class JSProductCrawler implements JSCrawler
      * @param  string $url    URL to request
      * @param  string $method HTTP method to use
      * @return Crawler        Symfony\Component\DomCrawler\Crawler DOM Crawler object
-     * @todo: means of passing in parameters for non-GET requests
+     * @todo: means of passing in parameters for non-GET requests?
      */
     private function request($url='', $method = 'GET')
     {

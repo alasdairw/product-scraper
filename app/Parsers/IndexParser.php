@@ -82,8 +82,6 @@ class IndexParser implements Parser
      */
     public function getDescriptionAndSize(Crawler $product)
     {
-        
-
         $link_url = $product->selectLink($this->getTitle($product))->link()->getUri();
         $product_parser = new ProductParser(new JSProductCrawler($link_url));
         $description = $product_parser->getDescription();

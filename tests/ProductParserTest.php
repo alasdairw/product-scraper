@@ -51,6 +51,8 @@ EOD;
         $description = $this->parser->getDescription();
         $this->assertInternalType('string',$description);
         $this->assertGreaterThanOrEqual(1,strlen($description));
+        $this->assertEquals('Buy Sainsbury\'s Conference Pears, Ripe & Ready x4 (minimum) online from Sainsbury\'s, the same great quality, freshness and choice you\'d find in store. Choose from 1 hour delivery slots and collect Nectar points.',$description);
+        
     }
 
     /**
@@ -61,6 +63,8 @@ EOD;
     {
         $size = $this->parser->getSize();
         $this->assertInternalType('string',$size);
-        $this->assertGreaterThanOrEqual(1,strlen($size));   
+        $this->assertGreaterThanOrEqual(1,strlen($size));
+        $this->assertEquals('9.77kb',$size);
+
     }
 }

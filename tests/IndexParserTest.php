@@ -15,6 +15,10 @@ class IndexParserTest extends TestCase
 {
     
 
+    /**
+     * Set up a mock index page
+     * @return void
+     */
     public function setUp()
     {
         $html = <<<EOD
@@ -76,12 +80,14 @@ EOD;
      */
     public function testExtractProductData()
     {
-        //$product = $this->parser->filter('.productInner')->eq(0);
-        //$output = $this->parser->extractProductData($product);
-        //$this->assertArrayHasKey('title',$output);
-        //$this->assertArrayHasKey('size',$output);
-        //$this->assertArrayHasKey('unit_price',$output);
-        //$this->assertArrayHasKey('description',$output);
+        $product = $this->parser->markup->filter('.productInner')->eq(0);
+        $output = $this->parser->extractProductData($product);
+        $this->assertArrayHasKey('title',$output);
+        $this->assertEquals('Sainsbury\'s Apricot Ripe & Ready x5',$output['title']);
+        $this->assertArrayHasKey('size',$output);
+        $this->assertArrayHasKey('unit_price',$output);
+        $this->assertEquals(3.5,$output['unit_price']);
+        $this->assertArrayHasKey('description',$output);
     }
 
     /**
@@ -94,6 +100,7 @@ EOD;
         $output = $this->parser->getTitle($this->parser->markup->filter('.productInner')->eq(0));
         $this->assertInternalType('string',$output);
         $this->assertGreaterThanOrEqual(1,strlen($output));
+        $this->assertEquals('Sainsbury\'s Apricot Ripe & Ready x5',$output);
     }
 
     /**
@@ -104,12 +111,17 @@ EOD;
     {
         $output = $this->parser->getUnitPrice($this->parser->markup->filter('.productInner')->eq(0));
         $this->assertInternalType('float',$output);
+        $this->assertEquals(3.5,$output);
     }
 
+    /**
+     * Test the output of the getDescription and Size method
+     * @return voice
+     */
     public function testGetDescriptionAndSize()
     {
-        //$output = $this->parser->getDescriptionAndSize($this->parser->base_request->filter('.productInner')->eq(0));
-        //$this->assertArrayHasKey('size',$output);
-        //$this->assertArrayHasKey('description',$output);
+        $output = $this->parser->getDescriptionAndSize($this->parser->markup->filter('.productInner')->eq(0));
+        $this->assertArrayHasKey('size',$output);
+        $this->assertArrayHasKey('description',$output);
     }
 }

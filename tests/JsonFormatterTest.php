@@ -22,6 +22,9 @@ class JSONFormatterTest extends TestCase
         $data = json_decode($output,true);
         $this->assertArrayHasKey('results',$data);
         $this->assertArrayHasKey('total',$data);
+        $this->assertEquals('12.00',$data['total']);
         $this->assertArrayHasKey('title',$data['results'][0]);
+        $this->assertEquals('Some title',$data['results'][0]['title']);
+        
     }
 }

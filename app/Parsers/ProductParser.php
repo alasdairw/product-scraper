@@ -13,8 +13,13 @@ class ProductParser implements Parser
         $this->crawler = $crawler;
     }
 
+    /**
+     * return array of size and descriotiuon for product page
+     * @return array to text elements
+     */
     public function getParsedData()
     {
+        return array('size'=>$this->getSize(),'description'=>$this->getDescription());
     }
     
     /**
