@@ -11,17 +11,17 @@ Running tests:
 
 running the scraper 
 
-    php artisan scrape:url
+    php run_generate_json.php
 
-## General Notes/Assumptions made
+## General Notes
 
-I've used the Laravel Lumen framework for this.  Honestly, it's overkill, but it was a fast way to spin up
-a scaffold to work in without a huge performance overhead, and in the event of this being real-world code, 
-it's very likely that the system would need to do more with the data it's gathering - ship it to a database, 
-cache it, republish it in some way - so while the framework is overkill for the specified task, it's likely 
-to be more useful in a real world scenario where development would be ongoing.
+I started out doing this using the Lumen framework.  I had it more or less done (correct output/tests passing), when 
+I realised that the framework was total overkill, so I refactored it completely.  I took the oppotunity of a second 
+pass to better separate things, and to properly mock my tests.
 
-The original application code is in app/Parsers, and app/Console/Commands/ScrapeCommand 
+There's still one test that isn't quite mocked to my satisfaction, and winds up making an external http call that's 
+not really needed, but I hope one test that's not perfect is forgiveable - I thought the alternative method to solve
+the problem was overkill.
 
 Tests are in /tests
 

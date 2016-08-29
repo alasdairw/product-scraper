@@ -115,7 +115,9 @@ EOD;
     }
 
     /**
-     * Test the output of the getDescription and Size method
+     * Test the output of the getDescription and Size method - this is going to wind up making
+     * an external http call thanks to the markup above, but I thing that adding a local http
+     * server to this just for the sake of one test is overkill.
      * @return voice
      */
     public function testGetDescriptionAndSize()

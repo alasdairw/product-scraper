@@ -13,7 +13,10 @@ class JSProductCrawlerTest extends TestCase
 {
     /**
      * Test the specific GET URL function
-     * @todo Mock this?
+     * I think we actually specifically want this to make a proper GET request, externally, since
+     * the purpose of this test is to actually check that we can - after all the application will
+     * fail if that's not possible for any reason.
+     * 
      * @return void
      */
     public function testGetURL()
