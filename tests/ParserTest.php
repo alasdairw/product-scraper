@@ -1,5 +1,4 @@
 <?php
-//use Laravel\Lumen\Testing\DatabaseTransactions;
 
 use PHPUnit\Framework\TestCase;
 use App\Parsers\Parser;
@@ -16,8 +15,8 @@ class ParserTest extends TestCase
      */
     public function testGetURL()
     {
-        $parser = new Parser();
-        $response = $parser->getURL('http://google.com');
+        //$parser = new Parser();
+        //$response = $parser->getURL('http://google.com');
         $this->assertInstanceOf(Crawler::class,$response);
     }
 }

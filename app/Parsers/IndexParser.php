@@ -9,17 +9,18 @@ use Symfony\Component\DomCrawler\Crawler;
  */
 class IndexParser extends Parser
 {
-    
-    
-    
-    
+    public function __construct(JSCrawler $crawler)
+    {
+        $this->js_crawler = $crawler;
+    }
+
     /**
      * Function to get the correct product data listed on the index page
      * @return  array Array of data to be converted to JSON.
      */
-    public function getProducts()
+    public function getParsedData()
     {
-        $output = $this->base_request->filter('.productInner')->each(function (Crawler $product)
+        $output = $this->js_crawler->filter('.productInner')->each(function (Crawler $product)
             {
                 return $this->extractProductData($product);
             });
@@ -33,13 +34,9 @@ class IndexParser extends Parser
 
         //The test specified PHP 5.4+ - if 5.5+ is acceptable, then this is a quicker way
         //$total = array_sum(array_column($output,'unit_price'));
-
         return array('results'=>$output,'total'=>number_format($total,2));
-
     }
-
-
-
+    
     /**
      * Method to extract the required base data from each product and convert to array elements;
      * @param  DOMElement $product DOMElement matching the product info

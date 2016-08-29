@@ -1,5 +1,7 @@
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
+use App\Formatters\JsonFormatter;
 
-$scraper = new App\Parsers\IndexParser();
+
+$output = new JsonFormatter();

@@ -11,28 +11,13 @@ use Symfony\Component\DomCrawler\Crawler;
 class IndexParserTest extends TestCase
 {
     
-    /**
-     * In the absence of a proper mock, let's create a parser object and some raw data, for use in
-     * all methods that need them, rather than repeatedly creating them.  
-     * @todo a proper mock object  
-     * 
-     */
-    public function setUp()
-    {
-        parent::setUp();
-        $this->get('/test-index');
-        $html = $this->response->getContent();
-        $this->parser = new IndexParser();
-        //Crawler requires a base url, even though the links in the content are actually to full 
-        //URLS beginning with http://
-        $this->parser->base_request = new Crawler($html,'http://test.app');
-    }
+
 
     /**
      * Test the specific GET request function
      * @return void
      */
-    public function testGetProducts()
+    public function testGetParsedData()
     {
         $response = $this->parser->getProducts();
         $this->assertArrayHasKey('results',$response);
@@ -46,8 +31,8 @@ class IndexParserTest extends TestCase
      */
     public function testExtractProductData()
     {
-        $product = $this->parser->base_request->filter('.productInner')->eq(1);
-        $output = $this->parser->extractProductData($product);
+        //$product = $this->parser->base_request->filter('.productInner')->eq(1);
+        //$output = $this->parser->extractProductData($product);
         $this->assertArrayHasKey('title',$output);
         $this->assertArrayHasKey('size',$output);
         $this->assertArrayHasKey('unit_price',$output);
@@ -61,7 +46,7 @@ class IndexParserTest extends TestCase
      */
     public function testGetTitle()
     {
-        $output = $this->parser->getTitle($this->parser->base_request->filter('.productInner')->eq(0));
+        //$output = $this->parser->getTitle($this->parser->base_request->filter('.productInner')->eq(0));
         $this->assertInternalType('string',$output);
         $this->assertGreaterThanOrEqual(1,strlen($output));
     }
@@ -72,13 +57,13 @@ class IndexParserTest extends TestCase
      */
     public function testGetUnitPrice()
     {
-        $output = $this->parser->getUnitPrice($this->parser->base_request->filter('.productInner')->eq(0));
+        //$output = $this->parser->getUnitPrice($this->parser->base_request->filter('.productInner')->eq(0));
         $this->assertInternalType('float',$output);
     }
 
     public function testGetDescriptionAndSize()
     {
-        $output = $this->parser->getDescriptionAndSize($this->parser->base_request->filter('.productInner')->eq(0));
+        //$output = $this->parser->getDescriptionAndSize($this->parser->base_request->filter('.productInner')->eq(0));
         $this->assertArrayHasKey('size',$output);
         $this->assertArrayHasKey('description',$output);
     }
