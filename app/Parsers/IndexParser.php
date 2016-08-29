@@ -84,10 +84,7 @@ class IndexParser implements Parser
     {
         $link_url = $product->selectLink($this->getTitle($product))->link()->getUri();
         $product_parser = new ProductParser(new JSProductCrawler($link_url));
-        $description = $product_parser->getDescription();
-        $size = $product_parser->getSize();
-
-        return array('description' => $description,'size'=>$size);
+        return $product_parser->getParsedData();
     }
 
 }
