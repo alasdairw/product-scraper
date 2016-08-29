@@ -1,13 +1,15 @@
 <?php 
+namespace App\Tests;
 use PHPUnit\Framework\TestCase;
 use App\Formatters\JsonFormatter;
 use App\Parsers\IndexParser;
+use Mockery;
 
 class JSONFormatterTest extends TestCase
 {
     public function setUp()
     {
-        $parser = Mockery::mock('\Parser');
+        $parser = Mockery::mock('Parser');
         $parser->shouldReceive('getParsedData')->once()->andReturn(array('results' => [array('title'=>'Some title')],'total'=>'12.00'));
         $this->formatter = new JsonFormatter($parser);
     }

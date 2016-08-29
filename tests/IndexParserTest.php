@@ -1,4 +1,5 @@
 <?php
+namespace App\Tests;
 use Mockery\Mockery;
 use PHPUnit\Framework\TestCase;
 use App\Parsers\IndexParser;

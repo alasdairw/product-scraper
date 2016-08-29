@@ -7,7 +7,7 @@ use Symfony\Component\DomCrawler\Crawler;
 /**
  * Class to parse the Index and extra relevant data for assembly
  */
-class IndexParser extends Parser
+class IndexParser implements Parser
 {
     public function __construct(JSCrawler $crawler)
     {

@@ -1,4 +1,5 @@
 <?php
+namespace 
 
 use PHPUnit\Framework\TestCase;
 use App\Parsers\Parser;
@@ -9,14 +10,5 @@ use Symfony\Component\DomCrawler\Crawler;
  */
 class ParserTest extends TestCase
 {
-    /**
-     * Test the specific GET request function
-     * @return void
-     */
-    public function testGetURL()
-    {
-        //$parser = new Parser();
-        //$response = $parser->getURL('http://google.com');
-        $this->assertInstanceOf(Crawler::class,$response);
-    }
+    
 }

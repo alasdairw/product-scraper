@@ -2,7 +2,12 @@
 namespace App\Crawlers;
 use Goutte\Client;
 
-class JSCrawler()
+interface JSCrawler
+{
+    public function getURL();
+}
+
+class JSProductCrawler implements JSCrawler
 {
     /**
      * Instantiates Goutte Client as $this->client
